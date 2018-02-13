@@ -18,10 +18,10 @@ $factory->define(App\Note::class, function (Faker $faker) {
         'name' => $faker->name,
         'description' => $faker->text,
         'user_id' => function () {
-            return factory(App\User::class)->make()->id;
+            return factory(App\User::class)->create()->id;
         },
         'book_id' => function () {
-            return factory(App\Book::class)->make()->id;
+            return factory(App\Book::class)->create()->id;
         }        
     ];
 });

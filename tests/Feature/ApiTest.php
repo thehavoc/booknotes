@@ -11,47 +11,47 @@ use Auth;
 
 class ApiController extends TestCase
 {
-    /**
-     * The notes that are used by the tests
-     *
-     * @var App\Task
-     */ 
-    protected $notes;
+	/**
+	 * The notes that are used by the tests
+	 *
+	 * @var App\Task
+	 */ 
+	protected $notes;
 
-    /**
-     * The user that is used by the tests
-     *
-     * @var integer
-     */ 
-    protected $user;
+	/**
+	 * The user that is used by the tests
+	 *
+	 * @var integer
+	 */ 
+	protected $user;
 
-    /**
-     * Set up the dummy data
-     *
-     */ 
-    public function setUp() {
-        parent::setUp();    
+	/**
+	 * Set up the dummy data
+	 *
+	 */ 
+	public function setUp() {
+		parent::setUp();    
 
-        $this->user = factory(User::class)->make();
+		$this->user = factory(User::class)->create();
 
-        $this->notes = factory(Note::class, 10)->make([
-            'user_id' => $this->user->id
-        ]);
+		$this->notes = factory(Note::class, 2)->create([
+			'user_id' => $this->user->id
+		]);
 
-        Auth::login($this->user);
-    }    
+		Auth::login($this->user);
+	}    
 
-    /**
-     * Get all notes of the user.
-     *
-     * @return void
-     */
-    public function testGetNotes()
-    {
-        $response = $this->json('GET', 'api/notes/');
+	/**
+	 * Get all notes of the user.
+	 *
+	 * @return void
+	 */
+	public function testGetNotes()
+	{
+		$response = $this->json('GET', 'api/notes/');
 
-        $response
-            ->assertStatus(200)
-            ->assertJson([$this->notes->toArray()]);
-    }
+		$response
+			->assertStatus(200)
+			->assertJson($this->notes->toArray());
+	}
 }

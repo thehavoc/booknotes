@@ -20,7 +20,7 @@ $factory->define(App\Book::class, function (Faker $faker) {
         'year' => $faker->year,
         'description' => $faker->text,
         'user_id' => function () {
-            return factory(App\User::class)->make()->id;
+            return factory(App\User::class)->create()->id;
         }
     ];
 });
