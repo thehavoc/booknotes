@@ -12,7 +12,7 @@ class Note extends Model
      * @var string
      */	
 	public function user(){
-		return $this->belongsTo("User");
+		return $this->belongsTo("App\User");
 	}	    
 
     /**

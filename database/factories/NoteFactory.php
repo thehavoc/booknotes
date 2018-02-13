@@ -13,12 +13,15 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\User::class, function (Faker $faker) {
+$factory->define(App\Note::class, function (Faker $faker) {
     return [
-    	'id' => $faker->randomNumber,
         'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
-        'remember_token' => str_random(10),
+        'description' => $faker->text,
+        'user_id' => function () {
+            return factory(App\User::class)->make()->id;
+        },
+        'book_id' => function () {
+            return factory(App\Book::class)->make()->id;
+        }        
     ];
 });
