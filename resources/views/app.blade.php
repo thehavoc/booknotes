@@ -38,11 +38,6 @@
 				<v-content>
 					<v-container fluid fill-height>
 						<router-view></router-view>
-						<div class="fixed-el">
-							<v-alert type="success" :value="true">
-							This is a success alert.
-							</v-alert>						
-						</div>
 					</v-container>
 				</v-content>
 
