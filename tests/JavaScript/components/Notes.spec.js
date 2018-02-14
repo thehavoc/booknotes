@@ -1,9 +1,10 @@
 import { shallow, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
-import notes from '../../../resources/assets/js/store/modules/notes.js';
+import Notes from '../../../resources/assets/js/components/Notes.vue';
+import notesModule from '../../../resources/assets/js/store/modules/notes.js';
 import moxios from 'moxios';
 import expect from 'expect';
-import apiRoutes from '../../../resources/assets/js/api/routes.js';
+import ApiRoutes from '../../../resources/assets/js/api/routes.js';
 
 const localVue = createLocalVue();
 
@@ -12,19 +13,21 @@ localVue.use(Vuex);
 describe ('Notes', () => {
 	let wrapper;
 	let store;
-	let route;
+	let apiRoutes;
 
 	beforeEach (() => {
 		moxios.install();
 
+		apiRoutes = new ApiRoutes();
+
 		store = new Vuex.Store({
 			state: {},
 			modules: {
-				notes
+				notesModule
 			}
 		});		
 
-		wrapper = shallow(UserTasks, { 
+		wrapper = shallow(Notes, { 
 			store, 
 			localVue
 		});
@@ -32,15 +35,19 @@ describe ('Notes', () => {
 
 
 	it ('shows notes', (done) => {
-		maxios.stubRequest(apiRoutes.getUrl('notes'), {
+		moxios.stubRequest(apiRoutes.getUrl('notes'), {
 			status: 200,
 			response: getNotes()
 		});
 
 		moxios.wait(() => {
-			expect(wrapper.vm.notes).not.toBeNull();
+			expect(wrapper.vm.notes).toHaveLength(getNotes().length);
 			done();
 		});
+	});
+
+	afterEach (() => {
+		moxios.uninstall();
 	});
 
 	let getNotes = () => {
