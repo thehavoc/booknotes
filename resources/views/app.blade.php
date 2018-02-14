@@ -46,7 +46,9 @@
 				</v-footer>						
 			</v-app>			
 		</div>
-
+		<script>
+		    window.baseUrl = "<?php echo url('/') ?>/";
+		</script>
 		<script src="{{ asset('js/app.js')}}"></script>
 	</body>
 </html>

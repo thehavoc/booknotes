@@ -31,8 +31,8 @@ describe ('Notes', () => {
 	});
 
 
-	it ('shows notes', () => {
-		maxios.stubRequest(apiRoutes.get('notes'), (done) => {
+	it ('shows notes', (done) => {
+		maxios.stubRequest(apiRoutes.getUrl('notes'), {
 			status: 200,
 			response: getNotes()
 		});
