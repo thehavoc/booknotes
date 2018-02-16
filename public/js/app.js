@@ -53797,7 +53797,20 @@ var render = function() {
                             { attrs: { flat: "" } },
                             [
                               _c("v-card-text", [
-                                _c("h3", [_vm._v("There are no added notes.")])
+                                _c(
+                                  "div",
+                                  [
+                                    _vm._v(
+                                      "There are no added notes. Please add a note from "
+                                    ),
+                                    _c(
+                                      "router-link",
+                                      { attrs: { to: "add-note" } },
+                                      [_vm._v("this link.")]
+                                    )
+                                  ],
+                                  1
+                                )
                               ])
                             ],
                             1

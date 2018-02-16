@@ -31,7 +31,7 @@
 					<v-flex>
 						<v-card flat>
 							<v-card-text>				
-								<h3>There are no added notes.</h3>
+								<div>There are no added notes. Please add a note from <router-link to="add-note">this link.</router-link></div>
 							</v-card-text>
 						</v-card>
 					</v-flex>
