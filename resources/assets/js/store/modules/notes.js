@@ -1,4 +1,4 @@
-import Api from '../../api/main.js';
+import Api from '../../api';
 import ApiRoutes from '../../api/routes.js';
 
 const api = new Api();

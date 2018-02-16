@@ -53929,12 +53929,12 @@ var index_esm = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api_main_js__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__api_routes_js__ = __webpack_require__(61);
 
 
 
-var api = new __WEBPACK_IMPORTED_MODULE_0__api_main_js__["a" /* default */]();
+var api = new __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */]();
 var apiRoutes = new __WEBPACK_IMPORTED_MODULE_1__api_routes_js__["a" /* default */]();
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -53981,7 +53981,108 @@ var apiRoutes = new __WEBPACK_IMPORTED_MODULE_1__api_routes_js__["a" /* default 
 });
 
 /***/ }),
-/* 60 */
+/* 60 */,
+/* 61 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * This is a class that handles the API routes of the app.
+ */
+
+var _class = function () {
+	function _class() {
+		_classCallCheck(this, _class);
+	}
+
+	_createClass(_class, [{
+		key: 'getRoutes',
+
+		/**
+   * Get all web and app URLs.
+   * @return {Object}
+   */
+		value: function getRoutes() {
+			return {
+				notes: 'api/notes/'
+			};
+		}
+
+		/**
+   * Prepare the absolute URL of a given path.
+   * Use a global JavaScript variable for the base URL.
+   * @param {String} field
+   * @return {String}
+   */
+
+	}, {
+		key: 'prepareUrl',
+		value: function prepareUrl(path) {
+			if (window.baseUrl) {
+				return window.baseUrl + path;
+			}
+
+			return path;
+		}
+
+		/**
+   * Get an absolute URL from all routes based on a given path
+   * @param {String} path
+   * @param {String} type (web|api)
+   * @return {String}
+   */
+
+	}, {
+		key: 'getUrl',
+		value: function getUrl(path) {
+			var routes = this.getRoutes();
+
+			if (path && routes.hasOwnProperty([path])) {
+				return this.prepareUrl(routes[path]);
+			}
+
+			return this.prepareUrl('not-found');
+		}
+	}]);
+
+	return _class;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (_class);
+
+/***/ }),
+/* 62 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_notes__ = __webpack_require__(59);
+/**
+ * This is the main place for saving/fetching data that can be shared between all components.
+ * Everything is added into modules. 
+ * The store communicates with the application's database using a dedicated API class.
+ */
+
+
+
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */]);
+
+/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
+  modules: {
+    notes: __WEBPACK_IMPORTED_MODULE_2__modules_notes__["a" /* default */]
+  }
+}));
+
+/***/ }),
+/* 63 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -54089,106 +54190,6 @@ var _class = function () {
 }();
 
 /* harmony default export */ __webpack_exports__["a"] = (_class);
-
-/***/ }),
-/* 61 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/**
- * This is a class that handles the API routes of the app.
- */
-
-var _class = function () {
-	function _class() {
-		_classCallCheck(this, _class);
-	}
-
-	_createClass(_class, [{
-		key: 'getRoutes',
-
-		/**
-   * Get all web and app URLs.
-   * @return {Object}
-   */
-		value: function getRoutes() {
-			return {
-				notes: 'api/notes/'
-			};
-		}
-
-		/**
-   * Prepare the absolute URL of a given path.
-   * Use a global JavaScript variable for the base URL.
-   * @param {String} field
-   * @return {String}
-   */
-
-	}, {
-		key: 'prepareUrl',
-		value: function prepareUrl(path) {
-			if (window.baseUrl) {
-				return window.baseUrl + path;
-			}
-
-			return path;
-		}
-
-		/**
-   * Get an absolute URL from all routes based on a given path
-   * @param {String} path
-   * @param {String} type (web|api)
-   * @return {String}
-   */
-
-	}, {
-		key: 'getUrl',
-		value: function getUrl(path) {
-			var routes = this.getRoutes();
-
-			if (path && routes.hasOwnProperty([path])) {
-				return this.prepareUrl(routes[path]);
-			}
-
-			return this.prepareUrl('not-found');
-		}
-	}]);
-
-	return _class;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (_class);
-
-/***/ }),
-/* 62 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_notes__ = __webpack_require__(59);
-/**
- * This is the main place for saving/fetching data that can be shared between all components.
- * Everything is added into modules. 
- * The store communicates with the application's database using a dedicated API class.
- */
-
-
-
-
-
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */]);
-
-/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
-  modules: {
-    notes: __WEBPACK_IMPORTED_MODULE_2__modules_notes__["a" /* default */]
-  }
-}));
 
 /***/ })
 /******/ ]);
