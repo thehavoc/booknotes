@@ -1,7 +1,7 @@
 import { shallow, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import Notes from '../../../resources/assets/js/components/Notes.vue';
-import notesModule from '../../../resources/assets/js/store/modules/notes.js';
+import NotesModule from '../../../resources/assets/js/store/modules/notes.js';
 import moxios from 'moxios';
 import expect from 'expect';
 import ApiRoutes from '../../../resources/assets/js/api/routes.js';
@@ -23,7 +23,7 @@ describe ('Notes', () => {
 		store = new Vuex.Store({
 			state: {},
 			modules: {
-				notesModule
+				notes: NotesModule
 			}
 		});		
 
@@ -33,6 +33,17 @@ describe ('Notes', () => {
 		});
 	});
 
+	it ('does not shows notes', (done) => {
+		moxios.stubRequest(apiRoutes.getUrl('notes'), {
+			status: 400,
+			response: []
+		});
+
+		moxios.wait(() => {
+			expect(wrapper.html()).toContain('There are no added notes.');
+			done();
+		});
+	});
 
 	it ('shows notes', (done) => {
 		moxios.stubRequest(apiRoutes.getUrl('notes'), {
@@ -54,12 +65,12 @@ describe ('Notes', () => {
 		return [
 			{
 				id: 1,
-				title: 'Test note',
+				description: 'Test note',
 				book: 'Book name',
 			},
 			{
 				id: 2,
-				title: 'Test note 2',
+				description: 'Test note 2',
 				book: 'Book name 2',				
 			}			
 		];
