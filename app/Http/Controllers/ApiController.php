@@ -23,6 +23,6 @@ class ApiController extends Controller
 	 */	
 	public function getNotes(Request $request) 
 	{	        
-		return Auth::user()->notes()->get();    	
+		return Auth::user()->notes()->with('book')->get();    	
 	}	
 }

@@ -32,7 +32,7 @@ export default {
 	},
 	actions: {
 		/**
-		 * Get all current user's notes by a date.
+		 * Get all current user's notes.
 		 * @param {Object} commit
 		 * @param {Object} date
 		 * @return {Promise}

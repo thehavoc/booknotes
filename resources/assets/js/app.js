@@ -9,8 +9,11 @@ import './app/vuetify';
 import { mainMenuItems } from './app/menus';
 import router from './app/router';
 
+import store from './store';
+
 const app = new Vue({
     el: '#app',
+    store,
     router,
     data: {
     	drawer: true,
