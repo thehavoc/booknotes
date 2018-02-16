@@ -2,8 +2,8 @@
 	<v-container grid-list-sm>
 		<v-layout row wrap>
 			<v-flex tag="h2" class="headline">Notes</v-flex>
-			<v-flex d-flex xs12 order-xs5 v-if="notes[0]">
-				<v-layout column>
+			<v-flex d-flex xs12 order-xs5>
+				<v-layout column v-if="notes[0]">
 					<v-flex v-for="note in notes" :key="note.id">
 						<v-card flat>
 							<v-card-text class="pb-0">
@@ -24,6 +24,15 @@
 									<v-icon small :color="action.class">{{ action.name }}</v-icon>
 								</v-btn>								
 							</v-card-actions>							
+						</v-card>
+					</v-flex>
+				</v-layout>
+				<v-layout column v-else>
+					<v-flex>
+						<v-card flat>
+							<v-card-text>				
+								<h3>There are no added notes.</h3>
+							</v-card-text>
 						</v-card>
 					</v-flex>
 				</v-layout>

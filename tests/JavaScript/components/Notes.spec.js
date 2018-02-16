@@ -35,7 +35,7 @@ describe ('Notes', () => {
 
 	it ('does not shows notes', (done) => {
 		moxios.stubRequest(apiRoutes.getUrl('notes'), {
-			status: 400,
+			status: 200,
 			response: []
 		});
 
