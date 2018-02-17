@@ -1,5 +1,5 @@
 <template>
-	<v-container>
+	<v-container>		
 		<v-form v-model="valid">
 			<v-text-field label="Description" v-model="note.description" required></v-text-field>
 

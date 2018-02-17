@@ -50879,11 +50879,17 @@ var routes = [{
 	path: '/notes',
 	name: 'notes',
 	component: __WEBPACK_IMPORTED_MODULE_2__components_Notes___default.a,
-	root: true
+	root: true,
+	meta: {
+		title: 'Notes'
+	}
 }, {
 	path: '/add-note',
 	name: 'addNote',
-	component: __WEBPACK_IMPORTED_MODULE_3__components_AddNote___default.a
+	component: __WEBPACK_IMPORTED_MODULE_3__components_AddNote___default.a,
+	meta: {
+		title: 'Add new note'
+	}
 }, {
 	path: '/',
 	redirect: {
@@ -53608,8 +53614,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
 
 /**
  * The main component that pulls the logged-in user's notes.
@@ -53852,10 +53856,6 @@ var render = function() {
         "v-layout",
         { attrs: { row: "", wrap: "" } },
         [
-          _c("v-flex", { staticClass: "headline", attrs: { tag: "h2" } }, [
-            _vm._v("Notes")
-          ]),
-          _vm._v(" "),
           _c(
             "v-flex",
             { attrs: { "d-flex": "", xs12: "", "order-xs5": "" } },

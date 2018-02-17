@@ -1,8 +1,6 @@
 <template>
-	<v-container grid-list-sm>
+	<v-container grid-list-sm>		
 		<v-layout row wrap>
-			<v-flex tag="h2" class="headline">Notes</v-flex>
-
 			<v-flex d-flex xs12 order-xs5>
 				<v-layout column v-if="notes[0]">
 					<NotesItem v-for="note in notes" :key="note.id" :note="note"/>

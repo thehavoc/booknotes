@@ -10,12 +10,18 @@ const routes = [
 		path: '/notes', 
 		name: 'notes', 
 		component: Notes,
-		root: true
+		root: true,
+		meta: { 
+			title: 'Notes'
+		}
 	},
 	{ 
 		path: '/add-note', 
 		name: 'addNote', 
-		component: AddNote
+		component: AddNote,
+		meta: { 
+			title: 'Add new note'
+		}		
 	},	
 	{ 
 		path: '/', 

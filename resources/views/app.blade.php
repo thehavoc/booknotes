@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 		
-		<title>Booknotes</title>
+		<title>{{ config('app.name') }}</title>
 		<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
 	</head>
 	<body>
@@ -28,11 +28,12 @@
 				
 				<v-toolbar color="indigo" dark fixed app>
 					<v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-					<v-toolbar-title>Book Notes</v-toolbar-title>
+					<v-toolbar-title>{{ config('app.name') }}</v-toolbar-title>
 				</v-toolbar>
 
 				<v-content>
 					<v-container fluid>
+						<h2 class="headline" v-if="$router.currentRoute.meta.title" v-text="$router.currentRoute.meta.title"></h2>
 						<router-view></router-view>
 					</v-container>
 				</v-content>
