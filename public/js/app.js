@@ -53582,32 +53582,10 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NotesItem_vue__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NotesItem_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__NotesItem_vue__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -53638,33 +53616,27 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
  */
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+	components: {
+		NotesItem: __WEBPACK_IMPORTED_MODULE_1__NotesItem_vue___default.a
+	},
+
+	data: function data() {
+		return {};
+	},
+
+
+	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])('notes', ['notes'])),
+
+	methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])('notes', ['fetchNotes'])),
+
 	/**
   * Dispatch a request to the store to get all the notes of the particular logged-in user.
   */
 	mounted: function mounted() {
 		this.fetchNotes();
-	},
-	data: function data() {
-		return {
-			leftActions: [{
-				name: 'edit',
-				class: 'blue'
-			}, {
-				name: 'favorite',
-				class: 'black'
-			}],
-			rightActions: [{
-				name: 'delete',
-				class: 'red'
-			}]
-		};
-	},
-
-
-	methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])('notes', ['fetchNotes'])),
-
-	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])('notes', ['notes']))
+	}
 });
 
 /***/ }),
@@ -53696,106 +53668,10 @@ var render = function() {
                     "v-layout",
                     { attrs: { column: "" } },
                     _vm._l(_vm.notes, function(note) {
-                      return _c(
-                        "v-flex",
-                        { key: note.id },
-                        [
-                          _c(
-                            "v-card",
-                            { attrs: { flat: "" } },
-                            [
-                              _c("v-card-text", { staticClass: "pb-0" }, [
-                                _c("div", [
-                                  _c(
-                                    "span",
-                                    { staticClass: "caption grey--text" },
-                                    [
-                                      _vm._v("\n\t\t\t\t\t\t\t\t\tBook: "),
-                                      _c(
-                                        "a",
-                                        {
-                                          staticClass: "grey--text",
-                                          attrs: { href: "#" }
-                                        },
-                                        [_vm._v(_vm._s(note.book.name))]
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("span", {
-                                    staticClass: "right caption grey--text",
-                                    domProps: {
-                                      textContent: _vm._s(note.created_at)
-                                    }
-                                  })
-                                ]),
-                                _vm._v(" "),
-                                _c("div", {
-                                  domProps: {
-                                    textContent: _vm._s(note.description)
-                                  }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "v-card-actions",
-                                [
-                                  _vm._l(_vm.leftActions, function(action) {
-                                    return _c(
-                                      "v-btn",
-                                      {
-                                        key: action.name,
-                                        attrs: { icon: "", small: "" }
-                                      },
-                                      [
-                                        _c(
-                                          "v-icon",
-                                          {
-                                            attrs: {
-                                              small: "",
-                                              color: action.class
-                                            }
-                                          },
-                                          [_vm._v(_vm._s(action.name))]
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  }),
-                                  _vm._v(" "),
-                                  _c("v-spacer"),
-                                  _vm._v(" "),
-                                  _vm._l(_vm.rightActions, function(action) {
-                                    return _c(
-                                      "v-btn",
-                                      {
-                                        key: action.name,
-                                        attrs: { icon: "", small: "" }
-                                      },
-                                      [
-                                        _c(
-                                          "v-icon",
-                                          {
-                                            attrs: {
-                                              small: "",
-                                              color: action.class
-                                            }
-                                          },
-                                          [_vm._v(_vm._s(action.name))]
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  })
-                                ],
-                                2
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
+                      return _c("NotesItem", {
+                        key: note.id,
+                        attrs: { note: note }
+                      })
                     })
                   )
                 : _c(
@@ -54244,6 +54120,200 @@ var _class = function () {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 61 */,
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(11)
+/* script */
+var __vue_script__ = __webpack_require__(63)
+/* template */
+var __vue_template__ = __webpack_require__(64)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/NotesItem.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4e704966", Component.options)
+  } else {
+    hotAPI.reload("data-v-4e704966", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 63 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(12);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/**
+ * This is a child component that shows the details of a note.
+ */
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: {
+		note: Object
+	},
+
+	mounted: function mounted() {}
+});
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-flex",
+    [
+      _c(
+        "v-card",
+        { attrs: { flat: "" } },
+        [
+          _c("v-card-text", { staticClass: "pb-0" }, [
+            _c("div", [
+              _c("span", { staticClass: "caption grey--text" }, [
+                _vm._v("\n\t\t\t\t\tBook: "),
+                _c("a", { staticClass: "grey--text", attrs: { href: "#" } }, [
+                  _vm._v(_vm._s(_vm.note.book.name))
+                ])
+              ]),
+              _vm._v(" "),
+              _c("span", {
+                staticClass: "right caption grey--text",
+                domProps: { textContent: _vm._s(_vm.note.created_at) }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", {
+              domProps: { textContent: _vm._s(_vm.note.description) }
+            })
+          ]),
+          _vm._v(" "),
+          _c(
+            "v-card-actions",
+            [
+              _c(
+                "v-btn",
+                { attrs: { icon: "", small: "" } },
+                [
+                  _c("v-icon", { attrs: { small: "", color: "blue" } }, [
+                    _vm._v("edit")
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                { attrs: { icon: "", small: "" } },
+                [
+                  _c("v-icon", { attrs: { small: "", color: "black" } }, [
+                    _vm._v("favorite")
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-spacer"),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                { attrs: { icon: "", small: "" } },
+                [
+                  _c("v-icon", { attrs: { small: "", color: "red" } }, [
+                    _vm._v("delete")
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4e704966", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
