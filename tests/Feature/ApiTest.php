@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Request;
 use App\User as User;
 use App\Book as Book;
 use App\Note as Note;
@@ -29,7 +30,8 @@ class ApiController extends TestCase
 	 * Set up the dummy data
 	 *
 	 */ 
-	public function setUp() {
+	public function setUp()
+	{
 		parent::setUp();    
 
 		$this->user = factory(User::class)->create();
@@ -39,10 +41,10 @@ class ApiController extends TestCase
 		]);
 
 		Auth::login($this->user);
-	}    
+	}
 
 	/**
-	 * Get all notes of the user.
+	 * Test getting all notes of the user
 	 *
 	 * @return void
 	 */
@@ -53,5 +55,21 @@ class ApiController extends TestCase
 		$response
 			->assertStatus(200)
 			->assertJson($this->notes->toArray());
+	}
+
+	/**
+	 * Test adding a note
+	 *
+	 * @return void
+	 */	
+	public function testAddNote()
+	{			
+		$response = $this->json('POST', 'api/addNote', (array) $this->notes[0]);
+
+		$new_task = json_decode($response->getContent());
+
+		$response
+			->assertStatus(200)
+			->assertJson($this->notes[0]);		
 	}
 }
