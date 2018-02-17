@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::get('notes', 'ApiController@getNotes');
+Route::post('addNote', 'ApiController@addNote');
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
