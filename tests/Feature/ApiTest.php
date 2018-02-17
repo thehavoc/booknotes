@@ -3,8 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\Request;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User as User;
 use App\Book as Book;
 use App\Note as Note;
@@ -12,10 +11,12 @@ use Auth;
 
 class ApiController extends TestCase
 {
+	use DatabaseTransactions;
+	
 	/**
 	 * The notes that are used by the tests
 	 *
-	 * @var App\Task
+	 * @var App\Note
 	 */ 
 	protected $notes;
 
@@ -53,7 +54,7 @@ class ApiController extends TestCase
 		$response = $this->json('GET', 'api/notes/');
 
 		$response
-			->assertStatus(200)
+			->assertSuccessful()
 			->assertJson($this->notes->toArray());
 	}
 
@@ -64,12 +65,17 @@ class ApiController extends TestCase
 	 */	
 	public function testAddNote()
 	{			
-		$response = $this->json('POST', 'api/addNote', (array) $this->notes[0]);
+		$exmaple_note = [
+			'book_id' => $this->notes->first()->book_id,
+			'description' => $this->notes->first()->description
+		];
 
-		$new_task = json_decode($response->getContent());
+		$response = $this->json('POST', 'api/addNote/', $exmaple_note);
+		
+		$new_note = json_decode($response->getContent());
 
 		$response
-			->assertStatus(200)
-			->assertJson($this->notes[0]);		
+			->assertSuccessful()
+			->assertJson($exmaple_note);		
 	}
 }
