@@ -53627,10 +53627,21 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
 
+/**
+ * The main component that pulls the logged-in user's notes.
+ */
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+	/**
+  * Dispatch a request to the store to get all the notes of the particular logged-in user.
+  */
 	mounted: function mounted() {
 		this.fetchNotes();
 	},
@@ -53650,7 +53661,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		};
 	},
 
+
 	methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])('notes', ['fetchNotes'])),
+
 	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])('notes', ['notes']))
 });
 

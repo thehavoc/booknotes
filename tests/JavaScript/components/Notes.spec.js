@@ -48,11 +48,11 @@ describe ('Notes', () => {
 	it ('shows notes', (done) => {
 		moxios.stubRequest(apiRoutes.getUrl('notes'), {
 			status: 200,
-			response: getNotes()
+			response: exampleNotes
 		});
 
 		moxios.wait(() => {
-			expect(wrapper.vm.notes).toHaveLength(getNotes().length);
+			expect(wrapper.vm.notes).toHaveLength(exampleNotes.length);
 			done();
 		});
 	});
@@ -61,18 +61,16 @@ describe ('Notes', () => {
 		moxios.uninstall();
 	});
 
-	let getNotes = () => {
-		return [
-			{
-				id: 1,
-				description: 'Test note',
-				book: 'Book name',
-			},
-			{
-				id: 2,
-				description: 'Test note 2',
-				book: 'Book name 2',				
-			}			
-		];
-	}
+	let exampleNotes = [
+		{
+			id: 1,
+			description: 'Test note',
+			book: 'Book name',
+		},
+		{
+			id: 2,
+			description: 'Test note 2',
+			book: 'Book name 2',				
+		}
+	];
 });
