@@ -29,7 +29,10 @@ describe ('NotesItem', () => {
 
 		wrapper = shallow(NotesItem, { 
 			store, 
-			localVue
+			localVue,
+			propsData: {
+				note: exampleNote
+			}
 		});
 	});
 
@@ -44,6 +47,7 @@ describe ('NotesItem', () => {
 	let exampleNote = {
 		id: 2,
 		description: 'Test note 2',
-		book: 'Book name 2',				
+		book: 'Book name 2',
+		created_at: '2018-02-17 00:00:00'			
 	}	
 });
