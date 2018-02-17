@@ -75,11 +75,7 @@ describe ('AddNote', () => {
 			{
 				selector: 'textarea[name="description"]',
 				value: withValue ? 'Test description' : '',
-			},
-			{
-				selector: 'input[name="book"]',
-				value: withValue ? 'Example book' : '',
-			},			
+			}
 		];
 
 		fields.map((field) => {

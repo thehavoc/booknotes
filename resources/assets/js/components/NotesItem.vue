@@ -3,7 +3,7 @@
 		<v-card flat>
 			<v-card-text class="pb-0">
 				<div>
-					<span class="caption grey--text">
+					<span class="caption grey--text" v-if="note.book">
 						Book: <a class="grey--text" href="#">{{ note.book.name }}</a>
 					</span>
 					<span class="right caption grey--text" v-text="note.created_at"></span>

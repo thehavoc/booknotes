@@ -1,23 +1,39 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card card-default">
-                    <div class="card-header">Example Component 2</div>
+	<v-container>
+		<v-form v-model="valid">
+			<v-text-field label="Description" v-model="note.description" required></v-text-field>
 
-                    <div class="card-body">
-                        I'm an example component.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+			<v-btn @click="submit">submit</v-btn>
+	  </v-form>
+	</v-container>
 </template>
 
 <script>
-    export default {
-        mounted() {
-            console.log('Component mounted.')
-        }
-    }
+	/**
+	 * A component that allows adding a note.
+	 */
+	import { mapGetters, mapActions } from 'vuex'; 
+
+	export default {
+		data() {
+			return {
+				valid: true,
+				note: {
+					description: ''
+				}
+			}
+		},
+
+		methods: {
+			/**
+			 * Dispatch a request to the store to add a note.
+			 * @return {Promise}
+			 */			
+			submit() {
+			}
+		},
+
+		mounted() {
+		}
+	}
 </script>
