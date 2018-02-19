@@ -37,7 +37,7 @@ describe ('NotesItem', () => {
 	});
 
 	it ('shows the note', () => {
-		expect(wrapper.html()).toContain(exampleNote.description);
+		expect(wrapper.html()).toContain(exampleNote.content);
 	});
 
 	afterEach (() => {
@@ -46,7 +46,7 @@ describe ('NotesItem', () => {
 
 	let exampleNote = {
 		id: 2,
-		description: 'Test note 2',
+		content: 'Test note 2',
 		book: 'Book name 2',
 		created_at: '2018-02-17 00:00:00'			
 	}	

@@ -9,7 +9,7 @@
 					<span class="right caption grey--text" v-text="note.created_at"></span>
 				</div>
 
-				<div v-text="note.description"></div>
+				<div v-text="note.content"></div>
 			</v-card-text>
 
 			<v-card-actions>

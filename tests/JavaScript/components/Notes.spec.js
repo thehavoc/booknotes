@@ -64,12 +64,12 @@ describe ('Notes', () => {
 	let exampleNotes = [
 		{
 			id: 1,
-			description: 'Test note',
+			content: 'Test note',
 			book: 'Book name',
 		},
 		{
 			id: 2,
-			description: 'Test note 2',
+			content: 'Test note 2',
 			book: 'Book name 2',				
 		}
 	];

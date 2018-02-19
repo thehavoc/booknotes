@@ -12,7 +12,7 @@ class Note extends Model
      * @var array
      */
     protected $fillable = [
-        'description', 'user_id', 'book_id',
+        'content', 'user_id', 'book_id',
     ];    
 
     /**
