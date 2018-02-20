@@ -10,6 +10,7 @@ export default class {
 	getRoutes() {
 		return {
 			notes: 'api/notes/',
+			addNote: 'api/addNote'
 		}
 	}
 

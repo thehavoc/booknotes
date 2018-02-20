@@ -4,7 +4,6 @@
  * The store communicates with the application's database using a dedicated API class.
  */
 
-
 import Vue from 'vue'
 import Vuex from 'vuex'
 import notes from './modules/notes'

@@ -67,7 +67,7 @@ class ApiController extends TestCase
 	{			
 		$exmaple_note = [
 			'book_id' => $this->notes->first()->book_id,
-			'description' => $this->notes->first()->description
+			'content' => $this->notes->first()->content
 		];
 
 		$response = $this->json('POST', 'api/addNote/', $exmaple_note);

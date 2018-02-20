@@ -1,7 +1,7 @@
 <template>
 	<v-container>		
 		<v-form v-model="valid">
-			<v-text-field label="Description" v-model="note.description" required></v-text-field>
+			<v-text-field textarea label="Content" v-model="note.content" name="content" required></v-text-field>
 
 			<v-btn @click="submit">submit</v-btn>
 	  </v-form>
@@ -19,21 +19,25 @@
 			return {
 				valid: true,
 				note: {
-					description: ''
+					content: ''
 				}
 			}
 		},
 
 		methods: {
+			...mapActions('notes', [
+				'addNote'
+			]),
+
 			/**
 			 * Dispatch a request to the store to add a note.
 			 * @return {Promise}
 			 */			
 			submit() {
+				this.addNote(this.note).then((res) => {
+					console.log(res);
+				});
 			}
-		},
-
-		mounted() {
 		}
 	}
 </script>

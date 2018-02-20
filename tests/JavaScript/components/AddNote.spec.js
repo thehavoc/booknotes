@@ -60,7 +60,7 @@ describe ('AddNote', () => {
 		click('#submit');
 
 		moxios.wait(() => {
-			expect(wrapper.html()).toContain('The description field is required');
+			expect(wrapper.html()).toContain('The content field is required');
 			done();
 		});
 
@@ -73,8 +73,8 @@ describe ('AddNote', () => {
 	let typeForm = (withValue = true) => {
 		let fields = [
 			{
-				selector: 'textarea[name="description"]',
-				value: withValue ? 'Test description' : '',
+				selector: 'textarea[name="content"]',
+				value: withValue ? 'Test content' : '',
 			}
 		];
 

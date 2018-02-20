@@ -21,7 +21,7 @@ export default {
 	},
 	mutations: {
 		/**
-		 * Set notes to the state.
+		 * Set notes to the state
 		 * @param {Object} state
 		 * @param {Object} notes
 		 * @return void
@@ -32,7 +32,7 @@ export default {
 	},
 	actions: {
 		/**
-		 * Get all current user's notes.
+		 * Get all current user's notes
 		 * @param {Object} commit
 		 * @param {Object} date
 		 * @return {Promise}
@@ -41,6 +41,17 @@ export default {
 			return api.get(apiRoutes.getUrl('notes')).then((res) => {
 				commit('SET', res);
 			});
-		}
+		},
+
+		/**
+		 * Add a note to the database
+		 *
+		 * @param {Object} {commit, dispatch}
+		 * @param {Object} note
+		 * @return {Promise}
+		 */	
+		 addNote({ commit, dispatch }, note) {
+		 	return api.post(apiRoutes.getUrl('addNote'), note);
+		 }
 	}
 }
