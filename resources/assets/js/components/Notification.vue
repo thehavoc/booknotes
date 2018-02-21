@@ -1,5 +1,5 @@
 <template>
-	<v-alert type="success" :value="message ? true : false">
+	<v-alert type="success" :value="message ? true : false" transition="fade-transition">
 		{{ message }}
 	</v-alert>	
 </template>
