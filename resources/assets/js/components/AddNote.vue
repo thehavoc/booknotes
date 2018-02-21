@@ -1,9 +1,9 @@
 <template>
 	<v-container>		
 		<v-form v-model="valid">
-			<v-text-field textarea label="Content" v-model="note.content" name="content" required></v-text-field>
+			<v-text-field textarea label="Content" v-model="note.content" name="content" required :rules="contentRules"></v-text-field>
 
-			<v-btn @click="submit" id="submit">submit</v-btn>
+			<v-btn @click="submit" :disabled="!valid" id="submit">submit</v-btn>
 	  </v-form>
 	</v-container>
 </template>
@@ -19,8 +19,11 @@
 			return {
 				valid: true,
 				note: {
-					content: ''
-				}
+					content: ''					
+				},
+				contentRules: [
+					v => !!v || 'Content is required',
+				],				
 			}
 		},
 
