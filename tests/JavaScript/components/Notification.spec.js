@@ -1,10 +1,12 @@
 import { shallow, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import Notification from '../../../resources/assets/js/components/Notification.vue';
-import NotificationModule from '../../../resources/assets/js/store/modules/notification.js';
+import notificationModule from '../../../resources/assets/js/store/modules/notification.js';
 import expect from 'expect';
 
 const localVue = createLocalVue();
+
+localVue.use(Vuex);
 
 describe ('Notification', () => {
 	let wrapper;
@@ -14,7 +16,7 @@ describe ('Notification', () => {
 		store = new Vuex.Store({
 			state: {},
 			modules: {
-				notification: NotificationModule
+				notification: notificationModule
 			}
 		});		
 
@@ -25,7 +27,7 @@ describe ('Notification', () => {
 	});
 
 	it ('does not show the notification', () => {
-		wrapper.vm.update(this.exampleMessage);
+		wrapper.vm.update(exampleMessage);
 
 		wrapper.update();
 
@@ -33,15 +35,15 @@ describe ('Notification', () => {
 
 		wrapper.update();
 
-		expect(wrapper.html()).not.toContain(this.exampleMessage);
+		expect(wrapper.html()).not.toContain(exampleMessage);
 	});
 
 	it ('shows the notification', () => {
-		wrapper.vm.update(this.exampleMessage);
+		wrapper.vm.update(exampleMessage);
 
 		wrapper.update();
 
-		expect(wrapper.html()).toContain(this.exampleMessage);
+		expect(wrapper.html()).toContain(exampleMessage);
 	});	
 
 	afterEach (() => {

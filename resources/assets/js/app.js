@@ -11,6 +11,8 @@ import router from './app/router';
 
 import store from './store';
 
+Vue.component('notification', require('./components/Notification.vue'));
+
 const app = new Vue({
     el: '#app',
     store,
@@ -20,3 +22,4 @@ const app = new Vue({
     	mainMenuItems
     }
 });
+

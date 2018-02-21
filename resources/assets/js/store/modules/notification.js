@@ -19,13 +19,17 @@ export default {
 	},
 	mutations: {
 		/**
-		 * Change the message.
+		 * Change the message and then remove it.
 		 * @param {Object} state
 		 * @param {String} newMessage
 		 * @return void
 		 */	
 		CHANGE(state, message) {
 			state.message = message;
+
+			setTimeout(() => {
+				state.message = '';
+			}, 2500);
 		}
 	},
 	actions: {

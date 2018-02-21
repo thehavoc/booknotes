@@ -3,7 +3,7 @@
 		<v-form v-model="valid">
 			<v-text-field textarea label="Content" v-model="note.content" name="content" required></v-text-field>
 
-			<v-btn @click="submit">submit</v-btn>
+			<v-btn @click="submit" id="submit">submit</v-btn>
 	  </v-form>
 	</v-container>
 </template>
@@ -34,9 +34,7 @@
 			 * @return {Promise}
 			 */			
 			submit() {
-				this.addNote(this.note).then((res) => {
-					console.log(res);
-				});
+				this.addNote(this.note);
 			}
 		}
 	}

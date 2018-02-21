@@ -1,3 +1,7 @@
+/**
+ * This ia module that stores, updates, deletes and adds notes.
+ */
+
 import Api from '../../api';
 import ApiRoutes from '../../api/routes.js';
 
@@ -51,7 +55,9 @@ export default {
 		 * @return {Promise}
 		 */	
 		 addNote({ commit, dispatch }, note) {
-		 	return api.post(apiRoutes.getUrl('addNote'), note);
+		 	return api.post(apiRoutes.getUrl('addNote'), note).then((res) => {
+		 		dispatch('notification/update', 'A new note has been added.', { root: true });
+		 	});
 		 }
 	}
 }

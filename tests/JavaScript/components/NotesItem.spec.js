@@ -1,7 +1,7 @@
 import { shallow, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import NotesItem from '../../../resources/assets/js/components/NotesItem.vue';
-import NotesModule from '../../../resources/assets/js/store/modules/notes.js';
+import notesModule from '../../../resources/assets/js/store/modules/notes.js';
 import moxios from 'moxios';
 import expect from 'expect';
 import ApiRoutes from '../../../resources/assets/js/api/routes.js';
@@ -23,7 +23,7 @@ describe ('NotesItem', () => {
 		store = new Vuex.Store({
 			state: {},
 			modules: {
-				notes: NotesModule
+				notes: notesModule
 			}
 		});		
 

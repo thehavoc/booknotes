@@ -36,7 +36,10 @@ class ApiController extends Controller
 	 */	
 	public function addNote(Request $request, Note $note) 
 	{	
-		$request['book_id'] = 29;
+		if(empty($request['book_id'])) {
+			$request['book_id'] = 29;
+		}
+		
 		$request['user_id'] = Auth::id();
 		return $note->create($request->all());
 	}	
