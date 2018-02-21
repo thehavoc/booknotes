@@ -53,22 +53,11 @@ describe ('AddNote', () => {
 		});		
 	});
 
-	// it ('does not create a note', (done) => {
-	// 	typeForm(false);
-
-	// 	moxios.stubRequest(apiRoutes.getUrl('addNote'), {
-	// 		status: 200,
-	// 		response: wrapper.vm.note
-	// 	});
-
-	// 	click('#submit');
-
-	// 	moxios.wait(() => {
-	// 		expect(wrapper.html()).toContain('The content field is required');
-	// 		done();
-	// 	});
-
-	// });
+	it ('does not create a note', () => {
+		click('#submit');
+		
+		expect(wrapper.vm.valid).toBe(false);
+	});
 
 	afterEach (() => {
 		moxios.uninstall();
