@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Note;
 use Auth;
+use Response;
 
 class ApiController extends Controller
 {
@@ -29,10 +30,11 @@ class ApiController extends Controller
 	}	
 
 	/**
-	 * Add a note to the database
+	 * Add a note
 	 *
 	 * @param Request $request
-	 * @return 
+	 * @param Note $note
+	 * @return Collection
 	 */	
 	public function addNote(Request $request, Note $note) 
 	{	
@@ -41,7 +43,23 @@ class ApiController extends Controller
 		}
 		
 		$request['user_id'] = Auth::id();
+
 		return $note->create($request->all());
 	}	
 
+	/**
+	 * Remove a note 
+	 *
+	 * @param Request $request
+	 * @param Note $note
+	 * @return boolean
+	 */	
+	public function deleteNote(Request $request, Note $note) 
+	{	
+		if(Auth::id() !== $note->user_id) {
+			return false;
+		}
+
+		return Response::json($note->delete());
+	}	
 }

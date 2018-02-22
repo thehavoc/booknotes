@@ -40,8 +40,6 @@ class ApiController extends TestCase
 		$this->notes = factory(Note::class, 2)->create([
 			'user_id' => $this->user->id
 		]);
-
-		Auth::login($this->user);
 	}
 
 	/**
@@ -51,7 +49,7 @@ class ApiController extends TestCase
 	 */
 	public function testGetNotes()
 	{
-		$response = $this->json('GET', 'api/notes/');
+		$response = $this->actingAs($this->user)->json('GET', 'api/notes/');
 
 		$response
 			->assertSuccessful()
@@ -70,7 +68,7 @@ class ApiController extends TestCase
 			'content' => $this->notes->first()->content
 		];
 
-		$response = $this->json('POST', 'api/addNote/', $exmaple_note);
+		$response = $this->actingAs($this->user)->json('POST', 'api/addNote/', $exmaple_note);
 		
 		$response
 			->assertSuccessful()
@@ -84,9 +82,7 @@ class ApiController extends TestCase
 	 */	
 	public function testRemoveNote() 
 	{	
-		$exmaple_note = $this->notes->last();
-
-		$response = $this->json('DELETE', 'api/deleteNote/', $exmaple_note);
+		$response = $this->actingAs($this->user)->delete('api/deleteNote/' . $this->notes->first()->id);
 
 		$response
 			->assertSuccessful();
