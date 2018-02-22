@@ -72,10 +72,23 @@ class ApiController extends TestCase
 
 		$response = $this->json('POST', 'api/addNote/', $exmaple_note);
 		
-		$new_note = json_decode($response->getContent());
-
 		$response
 			->assertSuccessful()
 			->assertJson($exmaple_note);		
 	}
+
+	/**
+	 * Test removing a note
+	 *
+	 * @return void
+	 */	
+	public function testRemoveNote() 
+	{	
+		$exmaple_note = $this->notes->last();
+
+		$response = $this->json('DELETE', 'api/deleteNote/', $exmaple_note);
+
+		$response
+			->assertSuccessful();
+	}	
 }
