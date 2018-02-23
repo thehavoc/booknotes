@@ -45,6 +45,10 @@ describe ('AddNote', () => {
 			response: wrapper.vm.note
 		});
 
+		wrapper.setData({
+			valid: true
+		});
+
 		click('#submit');
 
 		moxios.wait(() => {

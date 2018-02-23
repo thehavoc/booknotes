@@ -2,7 +2,7 @@
 	<v-snackbar type="success" v-model="snackbar">
 		{{ message }}
 
-		<v-btn flat color="pink" @click.native="snackbar = false">Close</v-btn>
+		<v-btn flat color="pink" @click.native="update('')">Close</v-btn>
 	</v-snackbar>
 </template>
 
@@ -24,12 +24,16 @@ export default {
 			'message'
 		]),
 
+		/**
+		 * Show the notification bar
+		 * return {Boolean}
+		 */
 		snackbar() {
 			if(this.message) {
 				return true;
 			}
 
-			return false
+			return false;
 		}
 	}
 }

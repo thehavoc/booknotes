@@ -1,11 +1,9 @@
 <template>
-	<v-container>		
-		<v-form v-model="valid">
-			<v-text-field textarea label="Content" v-model="note.content" name="content" required :rules="contentRules"></v-text-field>
+	<v-form v-model="valid">
+		<v-text-field textarea label="Content" v-model="note.content" name="content" required :rules="contentRules"></v-text-field>
 
-			<v-btn @click="submit" :disabled="!valid" id="submit">submit</v-btn>
-	  </v-form>
-	</v-container>
+		<v-btn @click="submit" :disabled="!valid" id="submit">submit</v-btn>
+  </v-form>
 </template>
 
 <script>
@@ -33,11 +31,13 @@
 			]),
 
 			/**
-			 * Dispatch a request to the store to add a note.
+			 * Dispatch a request to the store to add a note
 			 * @return void
 			 */			
-			submit() {
-				this.addNote(this.note);
+			submit() {		
+				if(this.valid) {
+					this.addNote(this.note);
+				}
 			}
 		}
 	}
