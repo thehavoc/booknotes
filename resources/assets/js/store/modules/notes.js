@@ -15,7 +15,7 @@ export default {
 	},
 	getters: {
 		/**
-		 * Get all notes.
+		 * Get all notes
 		 * @param {Object} state
 		 * @return {Object}
 		 */		
@@ -32,7 +32,17 @@ export default {
 		 */
 		SET(state, notes) {
 			state.notes = notes;
-		}
+		},
+
+		/**
+		 * Remove a note from the state.
+		 * @param {Object} state
+		 * @param {Object} index
+		 * @return void
+		 */
+		REMOVE(state, index) {
+			state.notes.splice(index, 1);
+		}		
 	},
 	actions: {
 		/**
@@ -48,9 +58,9 @@ export default {
 		},
 
 		/**
-		 * Add a note to the database
+		 * Add a note
 		 *
-		 * @param {Object} {commit, dispatch}
+		 * @param {Object} { commit, dispatch }
 		 * @param {Object} note
 		 * @return {Promise}
 		 */	
@@ -58,6 +68,25 @@ export default {
 		 	return api.post(apiRoutes.getUrl('addNote'), note).then((res) => {
 		 		dispatch('notification/update', 'A new note has been added.', { root: true });
 		 	});
-		 }
+		 },
+
+		/**
+		 * Delete a note
+		 *
+		 * @param {Object} { commit, dispatch, state }
+		 * @param {Object} note
+		 * @return {Promise}
+		 */	
+		 deleteNote({ commit, dispatch, state }, note) {
+		 	return api.delete(apiRoutes.getUrl('deleteNote') + note.id).then((res) => {
+				let index = state.notes.indexOf(note);
+
+				if(index > -1) {
+					commit('REMOVE', index);
+				}
+				
+		 		dispatch('notification/update', 'The note has been deleted.', { root: true });
+		 	});
+		 }		 
 	}
 }

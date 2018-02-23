@@ -13,7 +13,7 @@
 			</v-card-text>
 
 			<v-card-actions>
-				<v-btn icon small>
+				<v-btn id="edit-note" icon small>
 					<v-icon small color="blue">edit</v-icon>
 				</v-btn>
 
@@ -23,7 +23,7 @@
 
 				<v-spacer></v-spacer>
 				
-				<v-btn icon small>
+				<v-btn id="remove-note" @click="remove" icon small>
 					<v-icon small color="red">delete</v-icon>
 				</v-btn>
 			</v-card-actions>							
@@ -40,6 +40,22 @@
 	export default {
 		props: {
 			note: Object
+		},
+
+		methods: {
+			...mapActions('notes', [
+				'deleteNote'
+			]),
+
+			/**
+			 * Dispatch a request to the store to delete the note.
+			 * return void
+			 */
+			remove() {
+				if(window.confirm('Are you sure you want to delete this item?')) {
+					return this.deleteNote(this.note);
+				}
+			}
 		},
 
 		mounted() {

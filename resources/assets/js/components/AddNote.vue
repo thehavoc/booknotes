@@ -34,7 +34,7 @@
 
 			/**
 			 * Dispatch a request to the store to add a note.
-			 * @return {Promise}
+			 * @return void
 			 */			
 			submit() {
 				this.addNote(this.note);
