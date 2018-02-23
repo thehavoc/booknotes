@@ -33,11 +33,11 @@
 
 				<v-content>
 					<v-container fluid>
-						<h2 class="headline" v-if="$router.currentRoute.meta.title" v-text="$router.currentRoute.meta.title"></h2>
+						<notification></notification>
+						
+						<h2 class="headline" v-if="$router.currentRoute.meta.title" v-text="$router.currentRoute.meta.title"></h2>						
 
 						<router-view></router-view>
-
-						<notification />							
 					</v-container>
 				</v-content>
 

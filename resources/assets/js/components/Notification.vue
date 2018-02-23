@@ -1,7 +1,9 @@
 <template>
-	<v-alert type="success" :value="message ? true : false" transition="fade-transition">
+	<v-snackbar type="success" v-model="snackbar">
 		{{ message }}
-	</v-alert>	
+
+		<v-btn flat color="pink" @click.native="snackbar = false">Close</v-btn>
+	</v-snackbar>
 </template>
 
 <script>
@@ -20,7 +22,15 @@ export default {
 	computed: {
 		...mapGetters('notification', [
 			'message'
-		])
+		]),
+
+		snackbar() {
+			if(this.message) {
+				return true;
+			}
+
+			return false
+		}
 	}
 }
 
