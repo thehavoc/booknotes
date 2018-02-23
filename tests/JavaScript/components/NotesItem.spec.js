@@ -1,14 +1,18 @@
-import { shallow, createLocalVue } from '@vue/test-utils';
+import { mount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import NotesItem from '../../../resources/assets/js/components/NotesItem.vue';
 import notesModule from '../../../resources/assets/js/store/modules/notes.js';
+import notificationModule from '../../../resources/assets/js/store/modules/notification.js';
 import moxios from 'moxios';
+import sinon from 'sinon';
 import expect from 'expect';
 import ApiRoutes from '../../../resources/assets/js/api/routes.js';
+import Vuetify from 'vuetify';
 
 const localVue = createLocalVue();
 
 localVue.use(Vuex);
+localVue.use(Vuetify);
 
 describe ('NotesItem', () => {
 	let wrapper;
@@ -23,11 +27,12 @@ describe ('NotesItem', () => {
 		store = new Vuex.Store({
 			state: {},
 			modules: {
-				notes: notesModule
+				notes: notesModule,
+				notification: notificationModule
 			}
 		});		
 
-		wrapper = shallow(NotesItem, { 
+		wrapper = mount(NotesItem, { 
 			store, 
 			localVue,
 			propsData: {
@@ -40,6 +45,25 @@ describe ('NotesItem', () => {
 		expect(wrapper.html()).toContain(exampleNote.content);
 	});
 
+	it ('deletes the note', (done) => {
+		expect(wrapper.html()).toContain(exampleNote.content);
+
+		sinon.stub(window, 'confirm').returns(true);
+
+		moxios.stubRequest(apiRoutes.getUrl('deleteNote') + exampleNote.id, {
+			status: 200,
+			response: true
+		});
+
+		click('#remove-note');
+		
+		moxios.wait(() => {
+			expect(notificationModule.state.message).toBe('The note has been deleted.');
+			done();
+		});			
+
+	});
+
 	afterEach (() => {
 		moxios.uninstall();
 	});
@@ -50,4 +74,8 @@ describe ('NotesItem', () => {
 		book: 'Book name 2',
 		created_at: '2018-02-17 00:00:00'			
 	}	
+
+	let click = (selector) => {
+		wrapper.find(selector).trigger('click');
+	}		
 });
