@@ -7,35 +7,34 @@
 </template>
 
 <script>
-/**
- * This is a component that shows an alert box with a message when an action completes.
- */			
-import { mapGetters, mapActions } from 'vuex'	
+	/**
+	 * This is a component that shows an alert box with a message when an action completes.
+	 */			
+	import { mapGetters, mapActions } from 'vuex'	
 
-export default {
-	methods: {
-		...mapActions('notification', [
-			'update',
-		])	
-	},
+	export default {
+		methods: {
+			...mapActions('notification', [
+				'update',
+			])	
+		},
 
-	computed: {
-		...mapGetters('notification', [
-			'message'
-		]),
+		computed: {
+			...mapGetters('notification', [
+				'message'
+			]),
 
-		/**
-		 * Show the notification bar
-		 * return {Boolean}
-		 */
-		snackbar() {
-			if(this.message) {
-				return true;
+			/**
+			 * Show the notification bar
+			 * return {Boolean}
+			 */
+			snackbar() {
+				if(this.message) {
+					return true;
+				}
+
+				return false;
 			}
-
-			return false;
 		}
 	}
-}
-
 </script>
