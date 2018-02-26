@@ -72,7 +72,7 @@ class ApiController extends TestCase
 		
 		$response
 			->assertSuccessful()
-			->assertJson($exmaple_note);		
+			->assertJson($exmaple_note);
 	}
 
 	/**
@@ -82,9 +82,27 @@ class ApiController extends TestCase
 	 */	
 	public function testRemoveNote() 
 	{	
-		$response = $this->actingAs($this->user)->delete('api/deleteNote/' . $this->notes->first()->id);
+		$response = $this->actingAs($this->user)->json('DELETE', 'api/deleteNote/' . $this->notes->first()->id);
 
 		$response
 			->assertSuccessful();
+	}
+
+	/**
+	 * Test updating a note
+	 *
+	 * @return void
+	 */	
+	public function testUpdateNote() 
+	{	
+		$example_note = $this->notes->first()->toArray();
+
+		$example_note['content'] = 'New content';
+
+		$response = $this->actingAs($this->user)->json('PATCH', 'api/updateTask/' . $example_note['id'], $example_note);
+
+		$response
+			->assertSuccessful()
+			->assertJson($example_note);	
 	}	
 }
