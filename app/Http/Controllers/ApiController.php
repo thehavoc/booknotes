@@ -61,5 +61,22 @@ class ApiController extends Controller
 		}
 
 		return Response::json($note->delete());
+	}
+
+	/**
+	 * Edit a note
+	 *
+	 * @param Request $request
+	 * @param Note $note
+	 * @return Collection
+	 */	
+	public function updateTask(Request $request, Note $note) 
+	{	
+		if(Auth::id() !== $note->user_id) {
+			return false;
+		}
+
+		$note->update($request->all());
+		return $note;
 	}	
 }
