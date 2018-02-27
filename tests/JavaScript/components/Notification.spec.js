@@ -46,9 +46,5 @@ describe ('Notification', () => {
 		expect(wrapper.html()).toContain(exampleMessage);
 	});	
 
-	afterEach (() => {
-
-	});
-
 	let exampleMessage = 'Example message';
 });

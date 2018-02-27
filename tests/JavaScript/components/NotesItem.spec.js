@@ -8,6 +8,7 @@ import sinon from 'sinon';
 import expect from 'expect';
 import ApiRoutes from '../../../resources/assets/js/api/routes.js';
 import Vuetify from 'vuetify';
+import { exampleNote, click } from '../utilities.js';
 
 const localVue = createLocalVue();
 
@@ -55,7 +56,7 @@ describe ('NotesItem', () => {
 			response: true
 		});
 
-		click('#remove-note');
+		click('#remove-note', wrapper);
 		
 		moxios.wait(() => {
 			expect(notificationModule.state.message).toBe('The note has been deleted.');
@@ -66,16 +67,5 @@ describe ('NotesItem', () => {
 
 	afterEach (() => {
 		moxios.uninstall();
-	});
-
-	let exampleNote = {
-		id: 2,
-		content: 'Test note 2',
-		book: 'Book name 2',
-		created_at: '2018-02-17 00:00:00'			
-	}	
-
-	let click = (selector) => {
-		wrapper.find(selector).trigger('click');
-	}		
+	});	
 });

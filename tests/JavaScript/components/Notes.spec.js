@@ -5,6 +5,7 @@ import notesModule from '../../../resources/assets/js/store/modules/notes.js';
 import moxios from 'moxios';
 import expect from 'expect';
 import ApiRoutes from '../../../resources/assets/js/api/routes.js';
+import { exampleNotes } from '../utilities.js';
 
 const localVue = createLocalVue();
 
@@ -60,17 +61,4 @@ describe ('Notes', () => {
 	afterEach (() => {
 		moxios.uninstall();
 	});
-
-	let exampleNotes = [
-		{
-			id: 1,
-			content: 'Test note',
-			book: 'Book name',
-		},
-		{
-			id: 2,
-			content: 'Test note 2',
-			book: 'Book name 2',				
-		}
-	];
 });

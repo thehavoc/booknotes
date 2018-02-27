@@ -7,6 +7,7 @@ import notificationModule from '../../../resources/assets/js/store/modules/notif
 import moxios from 'moxios';
 import expect from 'expect';
 import ApiRoutes from '../../../resources/assets/js/api/routes.js';
+import { type, click } from '../utilities.js';
 
 const localVue = createLocalVue();
 
@@ -49,7 +50,7 @@ describe ('AddNote', () => {
 			valid: true
 		});
 
-		click('#submit');
+		click('#submit', wrapper);
 
 		moxios.wait(() => {
 			expect(notificationModule.state.message).toBe('A new note has been added.');
@@ -58,7 +59,7 @@ describe ('AddNote', () => {
 	});
 
 	it ('does not create a note', () => {
-		click('#submit');
+		click('#submit', wrapper);
 		
 		expect(wrapper.vm.valid).toBe(false);
 	});
@@ -76,18 +77,7 @@ describe ('AddNote', () => {
 		];
 
 		fields.map((field) => {
-			type(field.selector, field.value);
+			type(field.selector, field.value, wrapper);
 		});
-	}	
-	let type = (selector, text) => {
-
-		let input = wrapper.find(selector);
-
-		input.element.value = text;
-		input.trigger('input');
-	}
-
-	let click = (selector) => {
-		wrapper.find(selector).trigger('click');
 	}		
 });
