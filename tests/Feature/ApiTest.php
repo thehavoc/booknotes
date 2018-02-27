@@ -82,7 +82,7 @@ class ApiController extends TestCase
 	 */	
 	public function testRemoveNote() 
 	{	
-		$response = $this->actingAs($this->user)->json('DELETE', 'api/deleteNote/' . $this->notes->first()->id);
+		$response = $this->actingAs($this->user)->json('DELETE', 'api/deleteNote/' . $this->notes->first()->id, $this->notes->first()->toArray());
 
 		$response
 			->assertSuccessful();

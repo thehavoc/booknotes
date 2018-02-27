@@ -78,7 +78,7 @@ export default {
 		 * @return {Promise}
 		 */	
 		deleteNote({ commit, dispatch, state }, note) {
-			return api.delete(apiRoutes.getUrl('deleteNote') + note.id).then((res) => {
+			return api.delete(apiRoutes.getUrl('deleteNote') + note.id, note).then((res) => {
 				let index = state.notes.indexOf(note);
 
 				if(index > -1) {

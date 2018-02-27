@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Note;
 use Auth;
 use Response;
+use App\Http\Requests\UserRequest;
+use App\Http\Requests\SaveNoteRequest;
 
 class ApiController extends Controller
 {
@@ -54,12 +56,8 @@ class ApiController extends Controller
 	 * @param Note $note
 	 * @return boolean
 	 */	
-	public function deleteNote(Request $request, Note $note) 
+	public function deleteNote(UserRequest $request, Note $note) 
 	{	
-		if(Auth::id() !== $note->user_id) {
-			return false;
-		}
-
 		return Response::json($note->delete());
 	}
 
@@ -70,13 +68,10 @@ class ApiController extends Controller
 	 * @param Note $note
 	 * @return Collection
 	 */	
-	public function updateNote(Request $request, Note $note) 
+	public function updateNote(SaveNoteRequest $request, Note $note) 
 	{	
-		if(Auth::id() !== $note->user_id) {
-			return false;
-		}
-
 		$note->update($request->all());
+		
 		return $note;
 	}	
 }

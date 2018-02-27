@@ -28,7 +28,7 @@
 				<v-btn id="remove-note" @click="remove" icon small>
 					<v-icon small color="red">delete</v-icon>
 				</v-btn>
-			</v-card-actions>							
+			</v-card-actions>
 		</v-card>
 	</v-flex>
 </template>
