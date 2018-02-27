@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Book extends Model
+class Source extends Model
 {
 	/**
 	 * The attributes that are mass assignable.
@@ -12,11 +12,11 @@ class Book extends Model
 	 * @var array
 	 */
 	protected $fillable = [
-		'name', 'description', 'author', 'year', 'user_id'
+		'title', 'url', 'user_id'
 	];	
 
     /**
-     * Get the user that owns the book.
+     * Get the user that owns the source.
      *
      * @var string
      */	

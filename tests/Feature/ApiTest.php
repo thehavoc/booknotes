@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User as User;
-use App\Book as Book;
+use App\Source as Source;
 use App\Note as Note;
 use Auth;
 
@@ -64,7 +64,7 @@ class ApiController extends TestCase
 	public function testAddNote()
 	{			
 		$exmaple_note = [
-			'book_id' => $this->notes->first()->book_id,
+			'source_id' => $this->notes->first()->source_id,
 			'content' => $this->notes->first()->content
 		];
 

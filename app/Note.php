@@ -12,7 +12,7 @@ class Note extends Model
      * @var array
      */
     protected $fillable = [
-        'content', 'user_id', 'book_id',
+        'content', 'user_id', 'source_id',
     ];    
 
     /**
@@ -25,13 +25,13 @@ class Note extends Model
 	}	    
 
     /**
-     * Get the book that owns the note.
+     * Get the source that owns the note.
      *
      * @var string
      */	
-    public function book()
+    public function source()
     {
-        return $this->belongsTo('App\Book');
+        return $this->belongsTo('App\Source');
     }	
 
 }

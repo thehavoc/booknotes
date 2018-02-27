@@ -28,7 +28,7 @@ class SaveNoteRequest extends FormRequest
 
 		$rules = [
 			'content' => 'required',
-			'book_id' => 'required',
+			'source_id' => 'required',
 		];
 
 		$rules = $user_request->rules() + $rules;

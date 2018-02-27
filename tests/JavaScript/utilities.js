@@ -2,19 +2,19 @@ let exampleNotes = [
 	{
 		id: 1,
 		content: 'Test note',
-		book: 'Book name',
+		source: 'Source name',
 	},
 	{
 		id: 2,
 		content: 'Test note 2',
-		book: 'Book name 2',				
+		source: 'Source name 2',				
 	}
 ];
 
 let exampleNote = {
 	id: 2,
 	content: 'Test note 2',
-	book: 'Book name 2',
+	source: 'Source name 2',
 	created_at: '2018-02-17 00:00:00'			
 }
 

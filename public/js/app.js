@@ -53699,6 +53699,10 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(1);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
 //
 //
 //
@@ -53743,6 +53747,54 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		note: Object
 	},
 
+	data: function data() {
+		return {
+			editedNote: false
+		};
+	},
+
+
+	computed: {
+		editButtonColor: function editButtonColor() {
+			if (this.editedNote) {
+				return 'green';
+			}
+
+			return 'blue';
+		}
+	},
+
+	methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])('notes', ['deleteNote', 'updateNote']), {
+
+		/**
+   * Dispatch a request to the store to delete the note.
+   * return void
+   */
+		remove: function remove() {
+			if (window.confirm('Are you sure you want to delete this item?')) {
+				return this.deleteNote(this.note);
+			}
+		},
+
+
+		/**
+            * Enable the edit mode
+   * Dispatch a request to the store to edit the note.
+   * return {mixed}
+   */
+		edit: function edit() {
+			var _this = this;
+
+			if (!this.editedNote) {
+				return this.editedNote = true;
+			}
+
+			this.updateNote(this.note).then(function () {
+				_this.editedNote = false;
+			});
+		}
+	}),
+
 	mounted: function mounted() {}
 });
 
@@ -53761,38 +53813,65 @@ var render = function() {
         "v-card",
         { attrs: { flat: "" } },
         [
-          _c("v-card-text", { staticClass: "pb-0" }, [
-            _c("div", [
-              _vm.note.book
-                ? _c("span", { staticClass: "caption grey--text" }, [
-                    _vm._v("\n\t\t\t\t\tBook: "),
-                    _c(
-                      "a",
-                      { staticClass: "grey--text", attrs: { href: "#" } },
-                      [_vm._v(_vm._s(_vm.note.book.name))]
-                    )
-                  ])
+          _c(
+            "v-card-text",
+            { staticClass: "pb-0" },
+            [
+              _c("div", [
+                _vm.note.source
+                  ? _c("span", { staticClass: "caption grey--text" }, [
+                      _vm._v("\n\t\t\t\t\tSource: "),
+                      _c(
+                        "a",
+                        { staticClass: "grey--text", attrs: { href: "#" } },
+                        [_vm._v(_vm._s(_vm.note.source.title))]
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("span", {
+                  staticClass: "right caption grey--text",
+                  domProps: { textContent: _vm._s(_vm.note.created_at) }
+                })
+              ]),
+              _vm._v(" "),
+              !_vm.editedNote
+                ? _c("div", {
+                    domProps: { textContent: _vm._s(_vm.note.content) }
+                  })
                 : _vm._e(),
               _vm._v(" "),
-              _c("span", {
-                staticClass: "right caption grey--text",
-                domProps: { textContent: _vm._s(_vm.note.created_at) }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { domProps: { textContent: _vm._s(_vm.note.content) } })
-          ]),
+              _vm.editedNote
+                ? _c("v-text-field", {
+                    attrs: { name: "content", "multi-line": "" },
+                    model: {
+                      value: _vm.note.content,
+                      callback: function($$v) {
+                        _vm.$set(_vm.note, "content", $$v)
+                      },
+                      expression: "note.content"
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          ),
           _vm._v(" "),
           _c(
             "v-card-actions",
             [
               _c(
                 "v-btn",
-                { attrs: { icon: "", small: "" } },
+                {
+                  attrs: { id: "edit-note", icon: "", small: "" },
+                  on: { click: _vm.edit }
+                },
                 [
-                  _c("v-icon", { attrs: { small: "", color: "blue" } }, [
-                    _vm._v("edit")
-                  ])
+                  _c(
+                    "v-icon",
+                    { attrs: { small: "", color: _vm.editButtonColor } },
+                    [_vm._v("edit")]
+                  )
                 ],
                 1
               ),
@@ -53812,7 +53891,10 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-btn",
-                { attrs: { icon: "", small: "" } },
+                {
+                  attrs: { id: "remove-note", icon: "", small: "" },
+                  on: { click: _vm.remove }
+                },
                 [
                   _c("v-icon", { attrs: { small: "", color: "red" } }, [
                     _vm._v("delete")
@@ -53991,8 +54073,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
 
 /**
  * A component that allows adding a note.
@@ -54005,7 +54085,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			valid: true,
 			note: {
 				content: ''
-			}
+			},
+			contentRules: [function (v) {
+				return !!v || 'Content is required';
+			}]
 		};
 	},
 
@@ -54013,11 +54096,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 	methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])('notes', ['addNote']), {
 
 		/**
-   * Dispatch a request to the store to add a note.
-   * @return {Promise}
+   * Dispatch a request to the store to add a note
+   * @return void
    */
 		submit: function submit() {
-			this.addNote(this.note);
+			if (this.valid) {
+				this.addNote(this.note);
+			}
 		}
 	})
 });
@@ -54031,41 +54116,41 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-container",
-    [
-      _c(
-        "v-form",
-        {
-          model: {
-            value: _vm.valid,
-            callback: function($$v) {
-              _vm.valid = $$v
-            },
-            expression: "valid"
-          }
+    "v-form",
+    {
+      model: {
+        value: _vm.valid,
+        callback: function($$v) {
+          _vm.valid = $$v
         },
-        [
-          _c("v-text-field", {
-            attrs: {
-              textarea: "",
-              label: "Content",
-              name: "content",
-              required: ""
-            },
-            model: {
-              value: _vm.note.content,
-              callback: function($$v) {
-                _vm.$set(_vm.note, "content", $$v)
-              },
-              expression: "note.content"
-            }
-          }),
-          _vm._v(" "),
-          _c("v-btn", { attrs: { id: "submit" }, on: { click: _vm.submit } }, [
-            _vm._v("submit")
-          ])
-        ],
-        1
+        expression: "valid"
+      }
+    },
+    [
+      _c("v-text-field", {
+        attrs: {
+          textarea: "",
+          label: "Content",
+          name: "content",
+          required: "",
+          rules: _vm.contentRules
+        },
+        model: {
+          value: _vm.note.content,
+          callback: function($$v) {
+            _vm.$set(_vm.note, "content", $$v)
+          },
+          expression: "note.content"
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "v-btn",
+        {
+          attrs: { disabled: !_vm.valid, id: "submit" },
+          on: { click: _vm.submit }
+        },
+        [_vm._v("submit")]
       )
     ],
     1
@@ -54135,7 +54220,7 @@ var apiRoutes = new __WEBPACK_IMPORTED_MODULE_1__api_routes_js__["a" /* default 
 	},
 	getters: {
 		/**
-   * Get all notes.
+   * Get all notes
    * @param {Object} state
    * @return {Object}
    */
@@ -54152,6 +54237,17 @@ var apiRoutes = new __WEBPACK_IMPORTED_MODULE_1__api_routes_js__["a" /* default 
    */
 		SET: function SET(state, notes) {
 			state.notes = notes;
+		},
+
+
+		/**
+   * Remove a note from the state.
+   * @param {Object} state
+   * @param {Object} index
+   * @return void
+   */
+		REMOVE: function REMOVE(state, index) {
+			state.notes.splice(index, 1);
 		}
 	},
 	actions: {
@@ -54171,9 +54267,9 @@ var apiRoutes = new __WEBPACK_IMPORTED_MODULE_1__api_routes_js__["a" /* default 
 
 
 		/**
-   * Add a note to the database
+   * Add a note
    *
-   * @param {Object} {commit, dispatch}
+   * @param {Object} { commit, dispatch }
    * @param {Object} note
    * @return {Promise}
    */
@@ -54183,6 +54279,48 @@ var apiRoutes = new __WEBPACK_IMPORTED_MODULE_1__api_routes_js__["a" /* default 
 
 			return api.post(apiRoutes.getUrl('addNote'), note).then(function (res) {
 				dispatch('notification/update', 'A new note has been added.', { root: true });
+			});
+		},
+
+
+		/**
+   * Delete a note
+   *
+   * @param {Object} { commit, dispatch, state }
+   * @param {Object} note
+   * @return {Promise}
+   */
+		deleteNote: function deleteNote(_ref3, note) {
+			var commit = _ref3.commit,
+			    dispatch = _ref3.dispatch,
+			    state = _ref3.state;
+
+			return api.delete(apiRoutes.getUrl('deleteNote') + note.id, note).then(function (res) {
+				var index = state.notes.indexOf(note);
+
+				if (index > -1) {
+					commit('REMOVE', index);
+				}
+
+				dispatch('notification/update', 'The note has been deleted.', { root: true });
+			});
+		},
+
+
+		/**
+   * Update a note
+   *
+   * @param {Object} { commit, dispatch, state }
+   * @param {Object} note
+   * @return {Promise}
+   */
+		updateNote: function updateNote(_ref4, note) {
+			var commit = _ref4.commit,
+			    dispatch = _ref4.dispatch,
+			    state = _ref4.state;
+
+			return api.patch(apiRoutes.getUrl('updateNote') + note.id, note).then(function (res) {
+				dispatch('notification/update', 'The note has been updated.', { root: true });
 			});
 		}
 	}
@@ -54326,7 +54464,9 @@ var _class = function () {
 		value: function getRoutes() {
 			return {
 				notes: 'api/notes/',
-				addNote: 'api/addNote'
+				addNote: 'api/addNote',
+				deleteNote: 'api/deleteNote/',
+				updateNote: 'api/updateNote/'
 			};
 		}
 
@@ -54488,6 +54628,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
 
 /**
  * This is a component that shows an alert box with a message when an action completes.
@@ -54497,7 +54639,20 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 /* harmony default export */ __webpack_exports__["default"] = ({
 	methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])('notification', ['update'])),
 
-	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])('notification', ['message']))
+	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])('notification', ['message']), {
+
+		/**
+   * Show the notification bar
+   * return {Boolean}
+   */
+		snackbar: function snackbar() {
+			if (this.message) {
+				return true;
+			}
+
+			return false;
+		}
+	})
 });
 
 /***/ }),
@@ -54509,9 +54664,33 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-alert",
-    { attrs: { type: "success", value: _vm.message ? true : false } },
-    [_vm._v("\n\t" + _vm._s(_vm.message) + "\n")]
+    "v-snackbar",
+    {
+      attrs: { type: "success" },
+      model: {
+        value: _vm.snackbar,
+        callback: function($$v) {
+          _vm.snackbar = $$v
+        },
+        expression: "snackbar"
+      }
+    },
+    [
+      _vm._v("\n\t" + _vm._s(_vm.message) + "\n\n\t"),
+      _c(
+        "v-btn",
+        {
+          attrs: { flat: "", color: "pink" },
+          nativeOn: {
+            click: function($event) {
+              _vm.update("")
+            }
+          }
+        },
+        [_vm._v("Close")]
+      )
+    ],
+    1
   )
 }
 var staticRenderFns = []

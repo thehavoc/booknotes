@@ -19,8 +19,8 @@ $factory->define(App\Note::class, function (Faker $faker) {
         'user_id' => function () {
             return factory(App\User::class)->create()->id;
         },
-        'book_id' => function () {
-            return factory(App\Book::class)->create()->id;
+        'source_id' => function () {
+            return factory(App\Source::class)->create()->id;
         }        
     ];
 });

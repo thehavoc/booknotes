@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNotesTable extends Migration
+class CreateSourcesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateNotesTable extends Migration
      */
     public function up()
     {
-        Schema::create('notes', function (Blueprint $table) {
+        Schema::create('sources', function (Blueprint $table) {
             $table->increments('id');
-            $table->longText('content');
+            $table->string('title');
+            $table->string('url');
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('book_id')->unsigned();
-            $table->foreign('book_id')->references('id')->on('books');            
+            $table->foreign('user_id')->references('id')->on('users'); 
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateNotesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notes');
+        Schema::dropIfExists('sources');
     }
 }

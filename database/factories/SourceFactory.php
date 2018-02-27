@@ -13,12 +13,10 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Book::class, function (Faker $faker) {
+$factory->define(App\Source::class, function (Faker $faker) {
     return [    	
-        'name' => $faker->name,
-        'author' => $faker->name,
-        'year' => $faker->year,
-        'description' => $faker->text,
+        'title' => $faker->text,
+        'url' => 'http://example.com',
         'user_id' => function () {
             return factory(App\User::class)->create()->id;
         }
