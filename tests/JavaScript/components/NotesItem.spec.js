@@ -8,7 +8,7 @@ import sinon from 'sinon';
 import expect from 'expect';
 import ApiRoutes from '../../../resources/assets/js/api/routes.js';
 import Vuetify from 'vuetify';
-import { exampleNote, click } from '../utilities.js';
+import { exampleNote, click, type } from '../utilities.js';
 
 const localVue = createLocalVue();
 
@@ -64,6 +64,25 @@ describe ('NotesItem', () => {
 		});			
 
 	});
+
+	it ('updates the note', (done) => {
+		moxios.stubRequest(apiRoutes.getUrl('updateNote') + exampleNote.id, {
+			status: 200,
+			response: wrapper.vm.note
+		});
+
+		click('#edit-note', wrapper);
+
+		type('textarea[name="content"]', 'Updated content', wrapper);
+		
+		click('#edit-note', wrapper);
+
+		moxios.wait(() => {
+			expect(notificationModule.state.message).toBe('The note has been updated.');
+			done();
+		});
+
+	});	
 
 	afterEach (() => {
 		moxios.uninstall();
