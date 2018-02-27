@@ -64,11 +64,11 @@ export default {
 		 * @param {Object} note
 		 * @return {Promise}
 		 */	
-		 addNote({ commit, dispatch }, note) {
-		 	return api.post(apiRoutes.getUrl('addNote'), note).then((res) => {
-		 		dispatch('notification/update', 'A new note has been added.', { root: true });
-		 	});
-		 },
+		addNote({ commit, dispatch }, note) {
+			return api.post(apiRoutes.getUrl('addNote'), note).then((res) => {
+				dispatch('notification/update', 'A new note has been added.', { root: true });
+			});
+		},
 
 		/**
 		 * Delete a note
@@ -77,16 +77,29 @@ export default {
 		 * @param {Object} note
 		 * @return {Promise}
 		 */	
-		 deleteNote({ commit, dispatch, state }, note) {
-		 	return api.delete(apiRoutes.getUrl('deleteNote') + note.id).then((res) => {
+		deleteNote({ commit, dispatch, state }, note) {
+			return api.delete(apiRoutes.getUrl('deleteNote') + note.id).then((res) => {
 				let index = state.notes.indexOf(note);
 
 				if(index > -1) {
 					commit('REMOVE', index);
 				}
-				
-		 		dispatch('notification/update', 'The note has been deleted.', { root: true });
-		 	});
-		 }		 
+			
+				dispatch('notification/update', 'The note has been deleted.', { root: true });
+			});
+		},
+
+		/**
+		 * Update a note
+		 *
+		 * @param {Object} { commit, dispatch, state }
+		 * @param {Object} note
+		 * @return {Promise}
+		 */
+		updateNote({ commit, dispatch, state }, note) {
+			return api.patch(apiRoutes.getUrl('updateNote') + note.id, note).then((res) => {
+				dispatch('notification/update', 'The note has been updated.', { root: true });
+			});
+		}
 	}
 }

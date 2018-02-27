@@ -11,7 +11,8 @@ export default class {
 		return {
 			notes: 'api/notes/',
 			addNote: 'api/addNote',
-			deleteNote: 'api/deleteNote/'
+			deleteNote: 'api/deleteNote/',
+			updateNote: 'api/updateNote/'
 		}
 	}
 
