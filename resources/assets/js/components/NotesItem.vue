@@ -9,12 +9,14 @@
 					<span class="right caption grey--text" v-text="note.created_at"></span>
 				</div>
 
-				<div v-text="note.content"></div>
+				<div v-text="note.content" v-if="!editedNote"></div>
+
+				<v-text-field name="content" v-if="editedNote" multi-line v-model="note.content"></v-text-field>
 			</v-card-text>
 
 			<v-card-actions>
-				<v-btn id="edit-note" icon small>
-					<v-icon small color="blue">edit</v-icon>
+				<v-btn id="edit-note" icon small @click="edit">
+					<v-icon small :color="editButtonColor">edit</v-icon>
 				</v-btn>
 
 				<v-btn icon small>
@@ -39,12 +41,29 @@
 
 	export default {
 		props: {
-			note: Object
+			note: Object			
+		},
+
+		data() {
+			return {
+				editedNote: false
+			}
+		},
+
+		computed: {
+			editButtonColor() {
+				if(this.editedNote) {
+					return 'green';
+				}
+
+				return 'blue';
+			}
 		},
 
 		methods: {
 			...mapActions('notes', [
-				'deleteNote'
+				'deleteNote',
+				'updateNote'
 			]),
 
 			/**
@@ -55,7 +74,22 @@
 				if(window.confirm('Are you sure you want to delete this item?')) {
 					return this.deleteNote(this.note);
 				}
-			}
+			},
+
+			/**
+             * Enable the edit mode
+			 * Dispatch a request to the store to edit the note.
+			 * return {mixed}
+			 */
+			 edit() {
+			 	if(!this.editedNote) {
+			 		return this.editedNote = true;
+			 	}
+
+			 	this.updateNote(this.note).then(() => {
+			 		this.editedNote = false;
+			 	});
+			 }
 		},
 
 		mounted() {

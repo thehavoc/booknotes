@@ -70,7 +70,7 @@ class ApiController extends Controller
 	 * @param Note $note
 	 * @return Collection
 	 */	
-	public function updateTask(Request $request, Note $note) 
+	public function updateNote(Request $request, Note $note) 
 	{	
 		if(Auth::id() !== $note->user_id) {
 			return false;

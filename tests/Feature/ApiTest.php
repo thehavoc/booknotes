@@ -99,7 +99,7 @@ class ApiController extends TestCase
 
 		$example_note['content'] = 'New content';
 
-		$response = $this->actingAs($this->user)->json('PATCH', 'api/updateTask/' . $example_note['id'], $example_note);
+		$response = $this->actingAs($this->user)->json('PATCH', 'api/updateNote/' . $example_note['id'], $example_note);
 
 		$response
 			->assertSuccessful()
