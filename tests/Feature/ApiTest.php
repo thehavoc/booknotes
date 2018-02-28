@@ -104,5 +104,24 @@ class ApiController extends TestCase
 		$response
 			->assertSuccessful()
 			->assertJson($example_note);	
+	}
+
+	/**
+	 * Test adding a source
+	 *
+	 * @return void
+	 */	
+	public function testAddSource() 
+	{
+		$example_source = [
+			'title' => 'Example source',
+			'url' => 'http://example.com'
+		];
+
+		$response = $this->actingAs($this->user)->json('POST', 'api/addSource/', $example_source);
+
+		$response
+			->assertSuccessful()
+			->assertJson($example_source);
 	}	
 }

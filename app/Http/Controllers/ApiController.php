@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Note;
+use App\Source;
 use Auth;
 use Response;
 use App\Http\Requests\UserRequest;
@@ -73,5 +74,19 @@ class ApiController extends Controller
 		$note->update($request->all());
 		
 		return $note;
+	}
+
+	/**
+	 * Add a source
+	 *
+	 * @param Request $request
+	 * @param Source $source
+	 * @return Collection
+	 */	
+	public function addSource(Request $request, Source $source) 
+	{	
+		$request['user_id'] = Auth::id();
+
+		return $source->create($request->all());
 	}	
 }

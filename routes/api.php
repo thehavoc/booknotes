@@ -18,6 +18,9 @@ Route::post('addNote', 'ApiController@addNote');
 Route::delete('deleteNote/{note}', 'ApiController@deleteNote');
 Route::patch('updateNote/{note}', 'ApiController@updateNote');
 
+Route::post('addSource', 'ApiController@addSource');
+
+
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
