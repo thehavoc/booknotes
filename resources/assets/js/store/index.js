@@ -8,12 +8,14 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import notes from './modules/notes'
 import notification from './modules/notification'
+import sources from './modules/sources'
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
 	modules: {
 		notes,
-		notification
+		notification,
+		sources
 	}
 });

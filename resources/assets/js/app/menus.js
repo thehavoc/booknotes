@@ -8,6 +8,11 @@ const mainMenuItems = [
 		name: 'addNote',
 		title: 'Add new note',
 		icon: 'add'
+	},
+	{
+		name: 'addSource',
+		title: 'Add new source',
+		icon: 'add'
 	}	
 ];
 

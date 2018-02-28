@@ -1,8 +1,8 @@
 import { mount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import Vuetify from 'vuetify';
-import AddNote from '../../../resources/assets/js/components/AddNote.vue';
-import notesModule from '../../../resources/assets/js/store/modules/notes.js';
+import AddSource from '../../../resources/assets/js/components/AddSource.vue';
+import sourcesModule from '../../../resources/assets/js/store/modules/sources.js';
 import notificationModule from '../../../resources/assets/js/store/modules/notification.js';
 import moxios from 'moxios';
 import expect from 'expect';
@@ -14,7 +14,7 @@ const localVue = createLocalVue();
 localVue.use(Vuex);
 localVue.use(Vuetify);
 
-describe ('AddNote', () => {
+describe ('AddSource', () => {
 	let wrapper;
 	let store;
 	let apiRoutes;
@@ -27,23 +27,23 @@ describe ('AddNote', () => {
 		store = new Vuex.Store({
 			state: {},
 			modules: {
-				notes: notesModule,
+				sources: sourcesModule,
 				notification: notificationModule
 			}
 		});		
 
-		wrapper = mount(AddNote, { 
+		wrapper = mount(AddSource, { 
 			store, 
 			localVue
 		});
 	});
 
-	it ('creates a note', (done) => {
+	it ('creates a source', (done) => {
 		typeForm();
 
-		moxios.stubRequest(apiRoutes.getUrl('addNote'), {
+		moxios.stubRequest(apiRoutes.getUrl('addSource'), {
 			status: 200,
-			response: wrapper.vm.note
+			response: wrapper.vm.source
 		});
 
 		wrapper.setData({
@@ -53,14 +53,14 @@ describe ('AddNote', () => {
 		click('#submit', wrapper);
 
 		moxios.wait(() => {
-			expect(notificationModule.state.message).toBe('A new note has been added.');
+			expect(notificationModule.state.message).toBe('A new source has been added.');
 			done();
 		});		
 	});
 
-	it ('does not create a note', () => {
+	it ('does not create a source', () => {
 		click('#submit', wrapper);
-		
+
 		expect(wrapper.vm.valid).toBe(false);
 	});
 
@@ -71,9 +71,13 @@ describe ('AddNote', () => {
 	let typeForm = () => {
 		let fields = [
 			{
-				selector: 'textarea[name="content"]',
-				value: 'Test content',
-			}
+				selector: 'input[name="title"]',
+				value: 'Test source'
+			},		
+			{
+				selector: 'input[name="url"]',
+				value: 'http://example.com'
+			},
 		];
 
 		fields.map((field) => {

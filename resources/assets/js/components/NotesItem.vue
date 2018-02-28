@@ -4,12 +4,12 @@
 			<v-card-text class="pb-0">
 				<div>
 					<span class="caption grey--text" v-if="note.source">
-						Source: <a class="grey--text" href="#">{{ note.source.title }}</a>
+						Source: <a class="grey--text" target="_blank" :href="note.source.url">{{ note.source.title }}</a>
 					</span>
 					<span class="right caption grey--text" v-text="note.created_at"></span>
 				</div>
 
-				<div v-text="note.content" v-if="!editedNote"></div>
+				<div v-html="note.content" v-if="!editedNote"></div>
 
 				<v-text-field name="content" v-if="editedNote" multi-line v-model="note.content"></v-text-field>
 			</v-card-text>

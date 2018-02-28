@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Notes from '../components/Notes';
 import AddNote from '../components/AddNote';
+import AddSource from '../components/AddSource';
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,14 @@ const routes = [
 		component: AddNote,
 		meta: { 
 			title: 'Add new note'
+		}		
+	},
+	{ 
+		path: '/add-source', 
+		name: 'addSource', 
+		component: AddSource,
+		meta: { 
+			title: 'Add new source'
 		}		
 	},	
 	{ 

@@ -48,10 +48,9 @@ export default {
 		/**
 		 * Get all current user's notes
 		 * @param {Object} commit
-		 * @param {Object} date
 		 * @return {Promise}
 		 */
-		fetchNotes({ commit }, date) {
+		fetchNotes({ commit }) {
 			return api.get(apiRoutes.getUrl('notes')).then((res) => {
 				commit('SET', res);
 			});
