@@ -21,9 +21,16 @@ class ApiController extends TestCase
 	protected $notes;
 
 	/**
+	 * The sources that are used by the tests
+	 *
+	 * @var App\Source
+	 */ 
+	protected $sources;	
+
+	/**
 	 * The user that is used by the tests
 	 *
-	 * @var integer
+	 * @var App\User
 	 */ 
 	protected $user;
 
@@ -40,6 +47,10 @@ class ApiController extends TestCase
 		$this->notes = factory(Note::class, 2)->create([
 			'user_id' => $this->user->id
 		]);
+
+		$this->sources = factory(Source::class, 2)->create([
+			'user_id' => $this->user->id
+		]);		
 	}
 
 	/**
@@ -124,4 +135,18 @@ class ApiController extends TestCase
 			->assertSuccessful()
 			->assertJson($example_source);
 	}	
+
+	/**
+	 * Test getting all sources
+	 *
+	 * @return void
+	 */	
+	public function testGetSources() 
+	{	
+		$response = $this->actingAs($this->user)->json('GET', 'api/getSources/');
+
+		$response
+			->assertSuccessful()
+			->assertJson($this->sources);
+	}
 }
