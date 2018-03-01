@@ -29,7 +29,7 @@ class ApiController extends Controller
 	 */	
 	public function getNotes(Request $request) 
 	{	        
-		return Auth::user()->notes()->with('source')->get();    	
+		return Auth::user()->notes()->with('source')->get();
 	}	
 
 	/**
@@ -88,5 +88,17 @@ class ApiController extends Controller
 		$request['user_id'] = Auth::id();
 
 		return $source->create($request->all());
+	}	
+
+	/**
+	 * Get sources
+	 *
+	 * @param Request $request
+	 * @param Source $source
+	 * @return Collection
+	 */	
+	public function getSources(Request $request, Source $source) 
+	{	
+		return Auth::user()->sources()->get();		
 	}	
 }

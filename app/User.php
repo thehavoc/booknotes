@@ -10,7 +10,7 @@ class User extends Authenticatable
 	use Notifiable;
 
 	/**
-	 * The attributes that are mass assignable.
+	 * The attributes that are mass assignable
 	 *
 	 * @var array
 	 */
@@ -19,7 +19,7 @@ class User extends Authenticatable
 	];
 
 	/**
-	 * The attributes that should be hidden for arrays.
+	 * The attributes that should be hidden for arrays
 	 *
 	 * @var array
 	 */
@@ -28,12 +28,22 @@ class User extends Authenticatable
 	];
 
 	/**
-	 * Get the notes of the logged in user.
+	 * Get the notes of the logged in user
 	 * 
-	 * @return collection
+	 * @return Collection
 	 */
 	public function notes()
 	{
 		return $this->hasMany('App\Note');
-	}        
+	}
+
+	/**
+	 * Get the sources of the logged in user
+	 *
+	 * @return Collection
+	 */	
+	public function sources() 
+	{	
+		return $this->hasMany('App\Source');
+	}	
 }

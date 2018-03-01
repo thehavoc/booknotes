@@ -143,10 +143,10 @@ class ApiController extends TestCase
 	 */	
 	public function testGetSources() 
 	{	
-		$response = $this->actingAs($this->user)->json('GET', 'api/getSources/');
+		$response = $this->actingAs($this->user)->json('GET', 'api/sources/');
 
 		$response
 			->assertSuccessful()
-			->assertJson($this->sources);
+			->assertJson($this->sources->toArray());
 	}
 }
