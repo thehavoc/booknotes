@@ -32,9 +32,9 @@
 		},
 
 		methods: {
-			...mapActions('sources', [
-				'addSource'
-			]),
+			...mapActions({
+				'addSource': 'sources/addSource'
+			}),
 
 			/**
 			 * Dispatch a request to the store to add a source

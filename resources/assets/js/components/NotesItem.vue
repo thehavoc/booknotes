@@ -61,10 +61,10 @@
 		},
 
 		methods: {
-			...mapActions('notes', [
-				'deleteNote',
-				'updateNote'
-			]),
+			...mapActions({
+				'deleteNote': 'notes/deleteNote',
+				'updateNote': 'notes/updateNote'
+			}),
 
 			/**
 			 * Dispatch a request to the store to delete the note.

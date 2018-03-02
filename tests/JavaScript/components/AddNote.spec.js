@@ -4,8 +4,10 @@ import Vuetify from 'vuetify';
 import AddNote from '../../../resources/assets/js/components/AddNote.vue';
 import notesModule from '../../../resources/assets/js/store/modules/notes.js';
 import notificationModule from '../../../resources/assets/js/store/modules/notification.js';
+import sourcesModule from '../../../resources/assets/js/store/modules/sources.js';
 import moxios from 'moxios';
 import expect from 'expect';
+import sinon from 'sinon';
 import ApiRoutes from '../../../resources/assets/js/api/routes.js';
 import { type, click } from '../utilities.js';
 
@@ -28,7 +30,8 @@ describe ('AddNote', () => {
 			state: {},
 			modules: {
 				notes: notesModule,
-				notification: notificationModule
+				notification: notificationModule,
+				sources: sourcesModule
 			}
 		});		
 

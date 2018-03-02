@@ -38,15 +38,15 @@
 		},
 
 		computed: {
-			...mapGetters('notes', [
-				'notes'
-			])
+			...mapGetters({
+				'notes': 'notes/notes'
+			})
 		},
 
 		methods: {
-			...mapActions('notes', [
-				'fetchNotes'
-			])
+			...mapActions({
+				'fetchNotes': 'notes/fetchNotes'
+			})
 		},
 
 		/**

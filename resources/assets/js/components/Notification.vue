@@ -14,15 +14,15 @@
 
 	export default {
 		methods: {
-			...mapActions('notification', [
-				'update',
-			])	
+			...mapActions({
+				'update': 'notification/update'
+			})
 		},
 
 		computed: {
-			...mapGetters('notification', [
-				'message'
-			]),
+			...mapGetters({
+				'message': 'notification/message'
+			}),
 
 			/**
 			 * Show the notification bar
